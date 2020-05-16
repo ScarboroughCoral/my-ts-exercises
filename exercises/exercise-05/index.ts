@@ -63,12 +63,14 @@ function logPerson(person: Person) {
         ` - ${chalk.green(person.name)}, ${person.age}, ${person.type === 'admin' ? person.role : person.occupation}`
     );
 }
-
-function filterPersons(persons: Person[], personType: string, criteria: unknown): unknown[] {
+type CriteriaType<T> = Partial<Omit<T, 'type'>>;
+function filterPersons(persons: Person[], personType: "user", criteria: CriteriaType<User>): User[];
+function filterPersons(persons: Person[], personType: "admin", criteria: CriteriaType<Admin>): Admin[];
+function filterPersons(persons: Person[], personType: "user" | "admin", criteria: CriteriaType<Person>): Person[] {
     return persons
         .filter((person) => person.type === personType)
         .filter((person) => {
-            let criteriaKeys = Object.keys(criteria) as (keyof Person)[];
+            let criteriaKeys = Object.keys(criteria) as (keyof CriteriaType<Person>)[];
             return criteriaKeys.every((fieldName) => {
                 return person[fieldName] === criteria[fieldName];
             });

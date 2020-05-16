@@ -94,10 +94,10 @@ function logPerson(person: Person) {
     }
     console.log(` - ${chalk.green(person.name)}, ${person.age}, ${additionalInformation}`);
 }
-
-function filterUsers(persons: Person[], criteria: User): User[] {
+type CriteriaType = Partial<User>;
+function filterUsers(persons: Person[], criteria: CriteriaType): User[] {
     return persons.filter(isUser).filter((user) => {
-        let criteriaKeys = Object.keys(criteria) as (keyof User)[];
+        let criteriaKeys = Object.keys(criteria) as (keyof CriteriaType)[];
         return criteriaKeys.every((fieldName) => {
             return user[fieldName] === criteria[fieldName];
         });

@@ -1,4 +1,6 @@
 import chalk from 'chalk';
+import { Interface } from 'mz/readline';
+import { type } from 'os';
 
 /*
 
@@ -40,8 +42,9 @@ interface Admin {
     age: number;
     role: string;
 }
-
-type PowerUser = unknown;
+type PowerUser = Omit<User & Admin, 'type'> & {
+    type: 'powerUser'
+}
 
 type Person = User | Admin | PowerUser;
 

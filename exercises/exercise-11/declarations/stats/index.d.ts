@@ -8,7 +8,7 @@ declare module 'stats' {
     export const getMinElement: GetElementFunc;
     export const getMedianIndex: GetIndexFunc;
     export const getMedianElement: GetElementFunc;
-    export function getAverageValue<T, V>(input: T[], getValue: (input: T[]) => V): V;
+    export function getAverageValue<T, V>(input: T[], getValue: (input: T) => V): V;
 
 }
 // 我的菜鸡代码。。
